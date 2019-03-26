@@ -1,0 +1,77 @@
+ //Lars Deutz
+ //Period 7
+
+import static java.lang.System.*;
+import java.util.Scanner;
+import java.io.*;
+import java.util.Random;
+import java.util.ArrayList;
+
+public class BPARegistration
+{
+    public static void main(String[] args) throws IOException
+    {
+	ArrayList <BPAPerson> bpaPerson = new ArrayList<BPAPerson> ();
+
+	Scanner in = new Scanner(new File("BPANames.txt"));
+	Scanner kb = new Scanner(System.in);
+	bpaPerson.add(new BPAPerson(" "," "," "," "," ",0,0,0," "," "," ",0,0,0,0,0));
+
+	int counter =0;
+    while(in.hasNext()){
+    	in.nextLine();
+    	counter++;
+    }
+    String[] bpaConstant = new String[counter];
+    in = new Scanner(new File("BPANames.txt"));
+
+    for(int i=0;i<bpaConstant.length;i++){
+    	bpaConstant[i] = in.nextLine();
+   		}
+
+	String isd = "College Station";
+	String sName = "A&M Consolidated H S";
+	String street = "1801 Harvey Mitchell Pwky. S";
+	String cityZip = "College Station 77840";
+	String phone = "979-764-5500";
+	int again = 'n';
+
+	do{
+	out.print("Name of Participant:			");
+	bpaPerson.get(0).setParticipantName(kb.nextLine());
+
+	out.print("***ENTER TYPE OF PARTICIPANT***\n"+
+		"1] (T)EACHER\n"+
+		"2] (S)TUDENT\n"+
+		"3] (C)HAPERONE\n");
+
+	out.print("==> ");
+	char typeParticipant = kb.nextLine().toLowerCase().charAt(0);
+	bpaPerson.get(0).setTypeParticipant(typeParticipant);
+	if(typeParticipant=='s'){
+	boolean select=false;
+	do{
+	out.println("***GENERAL EVENTS***");
+	for(int i=0;i<6;i++){
+		out.println(bpaConstant[i]);
+	}
+	out.print("Select event or 0 to stop :: ");
+	int genEventChoice = kb.nextInt();
+	if(genEventChoice !=0 && genEventChoice <7){
+		bpaPerson.get(i).setGeneralEvent(bpaConstant[genEventChoice]);
+		select = true;
+	}else if(genEventChoice == 0)
+		select = false;
+
+	}while(select==true);
+	}
+	
+	out.print("Another person?\n<y>es <n>o ===>  ");
+	again =kb.nextLine().charAt(0);
+	}while(again == 'y');
+
+
+
+
+    }
+}
