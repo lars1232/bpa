@@ -1,4 +1,4 @@
- //Lars Deutz
+//Lars Deutz
  //Period 7
 
 import static java.lang.System.*;
@@ -15,7 +15,7 @@ public class BPARegistration
 
 	Scanner in = new Scanner(new File("BPANames.txt"));
 	Scanner kb = new Scanner(System.in);
-	bpaPerson.add(new BPAPerson(" "," "," "," "," ",0,0,0," "," "," ",0,0,0,0,0));
+	bpaPerson.add(new BPAPerson());
 
 	int counter =0;
     while(in.hasNext()){
@@ -51,6 +51,7 @@ public class BPARegistration
 	if(typeParticipant=='s'){
 	boolean select=false;
 	do{
+	//general events
 	out.println("***GENERAL EVENTS***");
 	for(int i=0;i<6;i++){
 		out.println(bpaConstant[i]);
@@ -58,14 +59,67 @@ public class BPARegistration
 	out.print("Select event or 0 to stop :: ");
 	int genEventChoice = kb.nextInt();
 	if(genEventChoice !=0 && genEventChoice <7){
-		bpaPerson.get(i).setGeneralEvent(bpaConstant[genEventChoice]);
+		bpaPerson.get(0).setGeneralEvent(bpaConstant[genEventChoice]);
 		select = true;
 	}else if(genEventChoice == 0)
 		select = false;
 
 	}while(select==true);
+	//team events
+	out.println("***TEAM EVENT***");
+	for(int i=6;i<10;i++){
+		out.println(bpaConstant[i]);
 	}
-	
+	out.println("Select one event or 0 to stop :: ");
+	int temEventChoice = kb.nextInt();
+	if(temEventChoice != 0 && temEventChoice < 11){
+		bpaPerson.get(0).setTeamEvent(bpaConstant[temEventChoice]);
+	}
+	//specialized fri morn competative event
+	out.println("**FRI MORN INDIVIDUAL COMPETATIVE EVENT***");
+	for(int i=10;i<26;i++){
+		out.println(bpaConstant[i]);
+	}
+	out.print("Select one event or 0 to stop :: ");
+	int frimornEvent = kb.nextInt();
+	if(frimornEvent != 0 && frimornEvent < 27){
+		bpaPerson.get(0).setIndividualEvent(bpaConstant[frimornEvent]);
+	}
+	//specialized fri afternoon competative event
+	if(frimornEvent == 0){
+		out.println("**FRI AFTERNOON INDIVIDUAL COMPETATIVE EVENT***");
+	for(int i=26;i<41;i++){
+		out.println(bpaConstant[i]);
+	}
+	out.print("Select one event or 0 to stop :: ");
+	int friafternoonEvent = kb.nextInt();
+	if(frimornEvent != 0 && frimornEvent < 42){
+		bpaPerson.get(0).setIndividualEvent(bpaConstant[frimornEvent]);
+	}
+	}else{
+		out.println("CANT COMPETE IN FRI AFTERNOON EVENTS");
+	}
+		
+	}
+	out.println("***SPECIAL EVENTS***");
+	//riverwalk A
+	if(bpaPerson.get(0).getTeamEvent().equals(" ")){
+		out.println("Do you want to attend Riverwalk A?\n<y>es  <n>o  ==> ");
+		char rivChoice = kb.nextLine().charAt(0);
+		if(rivChoice == 'y')
+			bpaPerson.get(0).setRiverWalkA(1);
+	}else{
+		out.println("Cant attend RIVERWALK A");
+	}
+	//riverwalk B
+	if(bpaPerson.get(0).getTeamEvent().equals(" ")){
+		out.println("Do you want to attend Riverwalk B?\n<y>es  <n>o  ==> ");
+		char rivChoice = kb.nextLine().charAt(0);
+		if(rivChoice == 'y')
+			bpaPerson.get(0).setRiverWalkB(1);
+	}else{
+		out.println("Cant attend RIVERWALK B");
+	}
 	out.print("Another person?\n<y>es <n>o ===>  ");
 	again =kb.nextLine().charAt(0);
 	}while(again == 'y');
