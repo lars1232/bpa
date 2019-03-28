@@ -37,6 +37,7 @@ public class BPARegistration
 	int again = 'n';
 
 	do{
+	boolean friaftIndicator =false;
 	out.print("Name of Participant:			");
 	bpaPerson.get(0).setParticipantName(kb.nextLine());
 
@@ -95,22 +96,32 @@ public class BPARegistration
 	int friafternoonEvent = kb.nextInt();
 	if(frimornEvent != 0 && frimornEvent < 42){
 		bpaPerson.get(0).setIndividualEvent(bpaConstant[frimornEvent]);
+		friaftIndicator = true;
 	}
 	}else{
 		out.println("CANT COMPETE IN FRI AFTERNOON EVENTS");
 	}
-		
+
 	}
 	out.println("***SPECIAL EVENTS***");
 	//riverwalk A
 	if(bpaPerson.get(0).getTeamEvent().equals(" ")){
 		out.println("Do you want to attend Riverwalk A?\n<y>es  <n>o  ==> ");
+		kb.nextLine();
 		char rivChoice = kb.nextLine().charAt(0);
 		if(rivChoice == 'y')
 			bpaPerson.get(0).setRiverWalkA(1);
 	}else{
 		out.println("Cant attend RIVERWALK A");
 	}
+	//Fiesta Texas trip
+
+	out.println("Do you want to attend Fiesta Texas?\n<y>es  <n>o  ==> ");
+		char fiestaChoice = kb.nextLine().charAt(0);
+		if(fiestaChoice == 'y')
+			bpaPerson.get(0).setFiestaTexas(1);
+
+
 	//riverwalk B
 	if(bpaPerson.get(0).getTeamEvent().equals(" ")){
 		out.println("Do you want to attend Riverwalk B?\n<y>es  <n>o  ==> ");
@@ -120,6 +131,60 @@ public class BPARegistration
 	}else{
 		out.println("Cant attend RIVERWALK B");
 	}
+
+	//torch awards
+	if(friaftIndicator == false){
+		out.println("Do you want to attend Torch Awards?\n<y>es  <n>o  ==> ");
+		char rivChoice = kb.nextLine().charAt(0);
+		if(rivChoice == 'y')
+			bpaPerson.get(0).setTorchAwardLuncheon(1);
+	}else{
+		out.println("Cant attend Torch Awards :(");
+	}
+
+	//putout
+	 out.printf("%-30s %-30s\n\n", "ISD:", "CSISD");
+     out.printf("%-30s %-30s\n", "School:", "A&M Consolidated High School");
+     out.printf("%-30s %-30s\n" , "Street:" , "1801 Harvey Mitchell Pkwy S");
+     out.printf("%-30s %-30s\n" , "City/ZIP:" , "College Station 77845");
+     out.printf("%-30s %-30s\n\n" , "Phone:" , "(979) 764-5500");
+
+     out.printf("%-30s %-30s\n\n\n" , "Participant's Name:" , bpaPerson.get(0).getParticipantName());
+
+     out.println("Status:");
+     if(bpaPerson.get(0).getTypeParticipant() == 't')
+     {
+        out.printf("%-30s %-30f\n\n\n", "     Teacher", 50.00);
+     }else if (bpaPerson.get(0).getTypeParticipant() == 's')
+      {
+        out.printf("%-30s %-30f\n\n\n", "     Student", 50.00);
+      }
+
+     if(bpaPerson.get(0).getTypeParticipant() == 'c')
+      {
+        out.printf("%-30s %-30f\n\n\n", "     Chaperone", 30.00);
+      }
+     out.printf("%-30s %-30s\n\n", "Individual Event:", bpaPerson.get(0).getIndividualEvent());
+
+     out.printf("%-30s %-30s\n\n", "Team Event:",bpaPerson.get(0).getTeamEvent());
+     out.printf("%-30s %-30s\n\n\n", "General Events:", bpaPerson.get(0).getGeneralEvent());
+     out.println("Status:");
+     if(bpaPerson.get(0).getRiverWalkA() == 1){
+     out.printf("%-30s %-30f\n\n", "     River Walk A", 10.00);
+     }
+     if(bpaPerson.get(0).getRiverWalkB() == 1){
+     out.printf("%-30s %-30f\n\n", "     River Walk B", 10.00);
+     }
+     if(bpaPerson.get(0).getFiestaTexas() == 1){
+     out.printf("%-30s %-30f\n\n", "     Fiesta Texas:", 25.00);
+     }
+     if(bpaPerson.get(0).getTorchAwardLuncheon() == 1){
+     out.printf("%-30s %-30f\n\n", "     Torch Award Luncheon:", 25.00);
+     }
+     out.printf("%-30s %-30s", "Total Registration:", "(Total Var)");
+
+
+
 	out.print("Another person?\n<y>es <n>o ===>  ");
 	again =kb.nextLine().charAt(0);
 	}while(again == 'y');
